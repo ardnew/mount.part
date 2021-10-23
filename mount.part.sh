@@ -3,21 +3,25 @@
 self=${0##*/}
 
 if [[ ${#} -lt 2 ]]; then
-  echo "USAGE"
-	echo "    ${self} disk-image mount-point [options...]"
-	echo
-	echo "DESCRIPTION"
-	echo "    ${self} mounts a partition found in the given image file disk-image"
-	echo "    at the specified path mount-point using the default loop device."
-	echo
-	echo "    The partition to mount is selected via interactive prompt."
-	echo
-	echo "    disk-image must be a path to a whole disk image (e.g., .img, .iso)."
-	echo "    mount-point is created if it does not exist. Remaining options are"
-	echo "    passed verbatim to mount(8)."
-	echo
-	echo "NOTES"
-	echo "    Requires sudo permissions for mount(8)."
+	cat <<__usage__
+USAGE
+    ${self} diskimage mountpoint [options...]
+
+DESCRIPTION
+    ${self} mounts a partition found in the given image file diskimage
+    at the specified path mountpoint using the default loop device.
+
+    The partition to mount is selected via interactive prompt, and its
+    file offset is computed automatically by parsing fdisk(8) output.
+
+    diskimage must be a path to a whole disk image (e.g., .img, .iso).
+    mountpoint is created if it does not exist. Remaining options are
+    passed verbatim to mount(8).
+
+NOTES
+    Requires sudo permissions for mount(8).
+
+__usage__
   exit 1
 fi
 
